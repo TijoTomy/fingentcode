@@ -1,0 +1,32 @@
+<div class="login-page">
+<mat-card >
+    <mat-card-title class="title">Login Form</mat-card-title>
+    <mat-card-content>
+<div class="example-container">
+    <div class="form-container">
+      <form [formGroup]="loginForm" autocomplete="off" (submit)="submit()">
+        <mat-form-field class="form-field" appearance="outline">
+          <mat-label> User-Name
+          </mat-label>
+          <input matInput formControlName="email" required (input)="checkinput()">
+          <mat-error *ngIf="loginForm.controls.email.touched && loginForm.controls.email.invalid">
+            <span *ngIf="loginForm.controls.email.errors?.required">This field is mandatory.</span>
+            <span *ngIf="loginForm.controls.email.errors?.pattern">This field is invalid.</span>
+          </mat-error>
+        </mat-form-field>
+        <mat-form-field class="form-field" appearance="outline">
+          <mat-label> Password
+          </mat-label>
+          <input matInput formControlName="password" type="password" (input)="checkinput()">
+          <mat-error *ngIf="loginForm.controls.password.touched && loginForm.controls.password.invalid">
+            <span *ngIf="loginForm.controls.password.errors?.required">This field is mandatory.</span>
+          </mat-error>
+        </mat-form-field>
+        <mat-error>{{invalidcred}}</mat-error>
+        <button mat-flat-button color="primary" type="submit">Log In</button>
+      </form>
+    </div>
+  </div>
+</mat-card-content>
+</mat-card>
+</div>

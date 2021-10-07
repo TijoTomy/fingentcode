@@ -1,0 +1,76 @@
+<div class="countrylist" *ngIf="displayPage!='edit';else countryedit">
+    <div class="header">
+        <h3>Country</h3>
+        <div style="font-size: 9px; margin-top:5px; ">
+        <mat-form-field class="searchbox" appearance="fill">
+        <mat-label>Search</mat-label>
+        <input matInput placeholder="seach country" [(ngModel)]="country" (input)="getInput($event)">
+    </mat-form-field>
+</div>
+     
+    </div>
+  
+<div class="contycontainer">
+    <div *ngFor="let country of countryWiseData" class="country">
+        <img class="png-icon" [src]="country.countryInfo.flag" style="width: 24px; height: 24px;">
+        <h5 class="countryname" style="color: lightblue;">{{ country.country}}</h5>
+        <div>
+            <h6>Cases</h6>
+            <p class="para">{{country.cases}}</p>
+        </div>
+        <div>
+            <h6>Death</h6>
+            <p class="para">{{country.deaths}}</p>
+        </div>
+        <div>
+            <h6>Recovered</h6>
+            <p class="para">{{country.recovered}}</p>
+        </div>
+        <div>
+            <h6>Test</h6>
+            <p class="para">{{country.tests}}</p>
+        </div>
+        
+        <div>
+            <h6>Population</h6>
+            <p class="para">{{country.population}}</p>
+        </div>
+        <div  class="edit">
+            <a (click)="edit(country)">
+            <mat-icon>create</mat-icon>
+        </a>
+        </div>
+    </div>
+</div>
+</div>
+<ng-template #countryedit>
+    <div class="formcontainer">
+    <h5>{{selectedCountry}}</h5>
+    <hr>
+    <form fxLayout="column" [formGroup]="editcountry" (submit)="submit()">
+        <div class="input-row" fxLayout="row"   fxLayoutAlign="center stretch">
+         
+          <mat-form-field fxFlex style="margin-right:35px;">
+            <input matInput type="text" placeholder="cases" formControlName="cases">
+          </mat-form-field>
+          <mat-form-field fxFlex style="margin-left:35px;">
+            <input matInput type="text" placeholder="deaths" formControlName="deaths">
+          </mat-form-field>
+
+        </div>
+  
+        <div class="input-row">
+          <mat-form-field fxFlex style="margin-right:35px;">
+            <input matInput  type="text"  placeholder="recovered" formControlName="recovered">
+          </mat-form-field>
+          <mat-form-field fxFlex style="margin-left:35px;">
+            <input matInput  type="text"  placeholder="tests" formControlName="tests">
+          </mat-form-field>
+        </div>
+        <div class="input-row">
+            <button mat-flat-button color="primary" (click)="canceleddit()" style="margin-right:35px;">cancel</button>
+        <button mat-flat-button color="accent" type="submit">save</button>
+        </div>
+      </form>
+    </div>
+</ng-template>
